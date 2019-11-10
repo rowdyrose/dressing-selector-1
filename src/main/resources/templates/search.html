@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1 th:text="${title}">Wound Care Dressing Finder</h1>
+
+<form method="post" th:object="${dressings}">
+    <div>
+        <label th:for="drainageAmount">Drainage Amount</label>
+        <select name="drainageAmount">
+            <option>None to small</option>
+            <option>small to moderate</option>
+            <option>moderate to heavy</option>
+        </select>
+    </div>
+
+    <input type="submit" value="search results" />
+</form>
+
+</body>
