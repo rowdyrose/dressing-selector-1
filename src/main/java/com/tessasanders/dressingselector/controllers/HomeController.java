@@ -25,7 +25,8 @@ public class HomeController {
 
     @RequestMapping(value = "search")
     public String DisplaySearchForm(Model model) {
-        model.addAttribute("title", "Search Dressings")
+        model.addAttribute("title", "Search Dressings");
+        return "results";
     }
 
 
