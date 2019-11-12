@@ -6,9 +6,9 @@
 <body>
 <h1 th:text="${title}">Wound Care Dressing Finder</h1>
 
-<form method="post" th:object="${dressings}">
+<form method="post">
     <div>
-        <label th:for="drainageAmount">Drainage Amount</label>
+        <label>Drainage Amount</label>
         <select name="drainageAmount">
             <option>None to small</option>
             <option>small to moderate</option>
@@ -16,7 +16,7 @@
         </select>
     </div>
 
-    <input type="submit" value="search results" />
+    <input type="submit" value="Find Dressings" />
 </form>
 
 </body>
