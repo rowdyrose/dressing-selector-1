@@ -13,6 +13,7 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
 
+
     @Autowired
     private DressingDao dressingDao;
 
@@ -25,7 +26,7 @@ public class HomeController {
     @RequestMapping(value = "results", method = RequestMethod.GET)
     public String DisplaySearchForm(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
 
-        ArrayList<dressingData> DressingData = dressingDao.findAll();
+        ArrayList<> = dressingDao.findAll();
 
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchTerm", searchTerm);

@@ -1,15 +1,7 @@
-package com.tessasanders.dressingselector.models.forms;
+package com.tessasanders.dressingselector.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class DressingData {
 
-
-@Entity
-public class Dressing {
-
-    @Id
-    @GeneratedValue
     private int dressingID;
 
     private String dressingName;
@@ -70,8 +62,6 @@ public class Dressing {
 
     private String frequencyAllowed;
 
-
-
-
-
 }
+
+
