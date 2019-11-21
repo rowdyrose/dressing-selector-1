@@ -1,6 +1,7 @@
 package com.tessasanders.dressingselector.controllers;
 
 import com.tessasanders.dressingselector.models.data.DressingDao;
+import com.tessasanders.dressingselector.models.forms.Dressing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +27,16 @@ public class HomeController {
     @RequestMapping(value = "results", method = RequestMethod.GET)
     public String DisplaySearchForm(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
 
-        ArrayList<> = dressingDao.findAll();
+        ArrayList<Dressing> dressingData = (ArrayList<Dressing>) dressingDao.findAll();
+
+        for (item : dressingData) {
+
+        }
 
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchTerm", searchTerm);
         model.addAttribute("columns", ListController.columnChoices);
+
         return "results";
     }
 }
