@@ -7,6 +7,6 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface DressingDao extends CrudRepository<Dressing, Integer> {
+public interface DressingDao extends CrudRepository<Dressing, Long> {
 
 }

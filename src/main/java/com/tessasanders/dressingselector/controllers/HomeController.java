@@ -25,17 +25,40 @@ public class HomeController {
     }
     //handler to process and display search results
     @RequestMapping(value = "results", method = RequestMethod.GET)
-    public String DisplaySearchForm(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+    public String DisplaySearchForm(Model model, @RequestParam String surgicalWound, @RequestParam(required = false) String debridementPerformed,
+                                    @RequestParam(required = false) String thickness, @RequestParam(required = false) String drainage) {
 
         ArrayList<Dressing> dressingData = (ArrayList<Dressing>) dressingDao.findAll();
+        ArrayList<Dressing> results = new ArrayList<>();
 
-        for (item : dressingData) {
-
+        for (Dressing item : dressingData) {
+            if (debridementPerformed != null && !debridementPerformed.toLowerCase().equals(item.getDebridementRequired().toLowerCase())) {
+                continue;
+            }
+            if (thickness != null && !thickness.toLowerCase().equals(item.getThicknessRequirement()) && !item.getThicknessRequirement().equals("any")) {
+                continue;
+            }
+            if (thickness != null && !thickness.toLowerCase().equals(item.getThicknessRequirement()) && !item.getThicknessRequirement().equals("full thickness")) {
+                continue;
+            }
+            if (drainage != null && !drainage.toLowerCase().equals(item.getDrainageRequirement()) && !item.getDrainageRequirement().equals("none to small")) {
+                continue;
+            }
+            if (drainage != null && !drainage.toLowerCase().equals(item.getDrainageRequirement()) && !item.getDrainageRequirement().equals("small to moderate")){
+                continue;
+            }
+            if (drainage != null && !drainage.toLowerCase().equals(item.getDrainageRequirement()) && !item.getDrainageRequirement().equals("moderate to heavy")){
+                continue;
+            }
+            results.add(item);
         }
+            model.addAttribute("title", "Wound Care Dressing Finder Results");
+            model.addAttribute("surgicalWound", surgicalWound);
+            model.addAttribute("debridementPerformed", debridementPerformed);
+            model.addAttribute("thickness", thickness);
+            model.addAttribute("drainage", drainage);
+            model.addAttribute("results", results);
 
-        model.addAttribute("searchType", searchType);
-        model.addAttribute("searchTerm", searchTerm);
-        model.addAttribute("columns", ListController.columnChoices);
 
         return "results";
     }

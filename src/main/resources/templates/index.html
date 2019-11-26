@@ -5,7 +5,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<nav th:replace="fragments :: navigation"></nav>
 <h1 th:text="${title}">Wound Care Dressing Finder</h1>
+
 <table>
     <tr>
         <td>
@@ -17,22 +19,22 @@
     <div>
         <p>Is the wound surgical?</p>
         <label>Yes</label>
-        <input type="radio" name="Yes">
+        <input type="radio" name="surgicalWound" value="Yes">
         <label>No</label>
-        <input type="radio" name="No">
+        <input type="radio" name="surgicalWound" value="No">
 
     </div>
     <div>
         <p>If the wound is not surgical, was debridement performed?</p>
         <label>Yes</label>
-        <input type="radio" name="Yes">
+        <input type="radio" name="debridementPerformed" value="Yes">
         <label>No</label>
-        <input type="radio" name="No">
+        <input type="radio" name="debridementPerformed" value="No">
 
     </div>
         <div>
         <label>What is the thickness of wound?</label>
-        <select>
+        <select name="thickness">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="partial thickness">partial thickness</option>
             <option value="full thickness">full thickness</option>
@@ -40,7 +42,7 @@
     </div>
     <div padding-top="40">
         <label>How much drainage does the wound have?  </label>
-        <select>
+        <select name="drainage">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="none to small">none to small</option>
             <option value="small to moderate">small to moderate</option>
