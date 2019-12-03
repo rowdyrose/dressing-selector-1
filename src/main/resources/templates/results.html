@@ -11,19 +11,16 @@
     <thead>
     <tr>
         <td>Dressing Name</td>
-        <td>Dressing NameTypeDressing Name</td>
         <td>Drainage Required</td>
-        <td>Debridement Required</td>
-        <td>Frequency Allowed</td>
         <td>Thickness Required</td>
+        <td>Frequency Allowed</td>
     </tr>
     </thead>
     <tr th:each="dressing : ${results}">
         <td th:text="${dressing.dressingName}"></td>
         <td th:text="${dressing.drainageRequirement}"></td>
-        <td th:text="${dressing.debridementRequired}"></td>
-        <td th:text="${dressing.frequencyAllowed}"></td>
         <td th:text="${dressing.thicknessRequirement}"></td>
+        <td th:text="${dressing.frequencyAllowed}"></td>
     </tr>
 </table>
 </body>
