@@ -14,7 +14,7 @@
     <tr>
         <td>
 <form method="get" action="/results">
-    <div>
+    <div class="form-group">
         <p>Is the wound surgical or has the wound been debrided?</p>
         <label for="debridementperformedyes">Yes</label>
         <input required id="debridementperformedyes" type="radio" name="debridementPerformed" value="Yes">
@@ -22,16 +22,16 @@
         <input required id="debridementperformedno" type="radio" name="debridementPerformed" value="No">
 
     </div>
-        <div>
-        <label>What is the thickness of wound?</label>
+        <div class="form-group">
+        <label>What is the thickness of wound?</label><br>
         <select required name="thickness">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="any">partial thickness</option>
             <option value="full thickness">full thickness</option>
         </select>
     </div>
-    <div padding-top="40">
-        <label>How much drainage does the wound have?  </label>
+    <div class="form-group">
+        <label>How much drainage does the wound have?  </label><br>
         <select required name="drainage">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="none to small">none to small</option>
@@ -39,7 +39,7 @@
             <option value="moderate to heavy">moderate to heavy</option>
         </select>
     </div>
-<div>
+<div class="form-group">
     <input type="submit" class="btn btn-primary" value="Search Dressings" />
 </div>
 </form>

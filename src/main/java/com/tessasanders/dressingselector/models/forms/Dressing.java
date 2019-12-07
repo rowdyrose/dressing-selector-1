@@ -10,7 +10,7 @@ public class Dressing {
 
     @Id
     @GeneratedValue
-    private int dressingID;
+    private int dressingId;
 
     private String dressingName;
 
@@ -20,12 +20,14 @@ public class Dressing {
 
     private String debridementRequired;
 
+    private String frequencyAllowed;
+
     public int getDressingID() {
-        return dressingID;
+        return dressingId;
     }
 
     public void setDressingID(int dressingID) {
-        this.dressingID = dressingID;
+        this.dressingId = dressingID;
     }
 
     public String getDressingName() {
@@ -68,5 +70,5 @@ public class Dressing {
         this.frequencyAllowed = frequencyAllowed;
     }
 
-    private String frequencyAllowed;
+
 }

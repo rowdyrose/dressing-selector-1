@@ -5,13 +5,9 @@ import com.tessasanders.dressingselector.models.forms.Dressing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
 
 @Controller
 public class ModifyController {
@@ -19,36 +15,42 @@ public class ModifyController {
     @Autowired
     private DressingDao dressingDao;
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "additems", method = RequestMethod.GET)
     public String displayAddForm(Model model) {
         model.addAttribute("title", "Add Dressing Item");
         model.addAttribute(new Dressing());
-        return "/add";
+        return "/editdressing";
 
     }
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddForm(@ModelAttribute @Valid Dressing newDressing, Errors errors, @RequestParam int categoryId, Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Dressing");
-            return "/add";
-        }
-
+    @RequestMapping(value = "additems", method = RequestMethod.POST)
+    public String processAddForm(Model model,
+                                 @RequestParam (required = false) String dressingId,
+                                 @RequestParam String dressingName,
+                                 @RequestParam String debridementRequired,
+                                 @RequestParam String drainageRequirement,
+                                 @RequestParam String thicknessRequirement,
+                                 @RequestParam String frequencyAllowed) {
+        Dressing newDressing = new Dressing();
+        newDressing.setDebridementRequired(debridementRequired);
+        newDressing.setDrainageRequirement(drainageRequirement);
+        newDressing.setDressingName(dressingName);
+        newDressing.setThicknessRequirement(thicknessRequirement);
+        newDressing.setFrequencyAllowed(frequencyAllowed);
         dressingDao.save(newDressing);
-        return "redirect:";
+        return "redirect:supplylist";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
-        model.addAttribute("dressings", dressingDao.findAll());
+        model.addAttribute("dressing", dressingDao.findAll());
         model.addAttribute("title", "Remove Dressing");
         return "/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveDressingForm(@RequestParam Long[] dressingIds) {
-
         for (Long dressingId : dressingIds) {
-            dressingDao.delete(dressingId);
+            dressingDao.deleteById(dressingId);
         }
 
         return "redirect:";
