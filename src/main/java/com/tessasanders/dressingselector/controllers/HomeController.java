@@ -26,7 +26,6 @@ public class HomeController {
     //handler to process and display search results
     @RequestMapping(value = "results", method = RequestMethod.GET)
     public String DisplaySearchForm(Model model,
-                                    @RequestParam String surgicalWound,
                                     @RequestParam(required = false) String debridementPerformed,
                                     @RequestParam(required = false) String thickness,
                                     @RequestParam(required = false) String drainage) {
@@ -35,14 +34,14 @@ public class HomeController {
         ArrayList<Dressing> results = new ArrayList<>();
 
          for (Dressing item : dressingData) {
-             if (surgicalWound != null && !surgicalWound.toLowerCase().equals(item.getDebridementRequired().toLowerCase())) {
-                 if (debridementPerformed != null && !debridementPerformed.toLowerCase().equals(item.getDebridementRequired().toLowerCase())) {
-                     continue;
-                 }
+             if (debridementPerformed != null && !debridementPerformed.toLowerCase().equals(item.getDebridementRequired().toLowerCase())) {
+                 continue;
+
+                     // need to add an error (medicare required either a surgical wound or debridement has been performed) if selected no
              }
-             // pulls results is wound is marked as debrided
-// searches based on thickness selected
-             if (thickness != null && !thickness.toLowerCase().equals(item.getThicknessRequirement()) && !item.getThicknessRequirement().equals("any")) {
+
+                // searches based on thickness selected
+            if (thickness != null && !thickness.toLowerCase().equals(item.getThicknessRequirement()) && !item.getThicknessRequirement().equals("any")) {
                  continue;
              }  // searches based on drainage selected
             if (drainage != null && !drainage.toLowerCase().equals(item.getDrainageRequirement().toLowerCase()) && !item.getDrainageRequirement().equals("any")) {
@@ -50,14 +49,23 @@ public class HomeController {
             }
             results.add(item);
        }
-        model.addAttribute("title", "Wound Care Dressing Finder Results");
-        model.addAttribute("surgicalWound", surgicalWound);
-        model.addAttribute("debridementPerformed", debridementPerformed);
-        model.addAttribute("thickness", thickness);
-        model.addAttribute("drainage", drainage);
-        model.addAttribute("results", results);
-
+         if (debridementPerformed.equals("No")) {
+             model.addAttribute("debridementError", "Per Medicare Guidelines wound must be surgical or have been debrided in order to supply surgical dressings");
+         }
+         model.addAttribute("title", "Wound Care Dressing Finder Results");
+         model.addAttribute("debridementPerformed", debridementPerformed);
+         model.addAttribute("thickness", thickness);
+         model.addAttribute("drainage", drainage);
+         model.addAttribute("results", results);
 
         return "results";
+    }
+    //handler to process and display search results
+    @RequestMapping(value = "supplylist", method = RequestMethod.GET)
+    public String DisplaySupplyList(Model model) {
+        ArrayList<Dressing> dressingData = (ArrayList<Dressing>) dressingDao.findAll();
+        model.addAttribute("supplyList", dressingData);
+
+        return "supplylist";
     }
 }

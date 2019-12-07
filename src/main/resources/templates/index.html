@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+    <head th:insert="fragments :: head"/>
 <body>
+<div class="container">
 <nav th:replace="fragments :: navigation"></nav>
 <h1 th:text="${title}">Wound Care Dressing Finder</h1>
 
@@ -17,24 +15,16 @@
         <td>
 <form method="get" action="/results">
     <div>
-        <p>Is the wound surgical?</p>
-        <label>Yes</label>
-        <input type="radio" name="surgicalWound" value="Yes">
-        <label>No</label>
-        <input type="radio" name="surgicalWound" value="No">
-
-    </div>
-    <div>
-        <p>If the wound is not surgical, was debridement performed?</p>
-        <label>Yes</label>
-        <input type="radio" name="debridementPerformed" value="Yes">
-        <label>No</label>
-        <input type="radio" name="debridementPerformed" value="No">
+        <p>Is the wound surgical or has the wound been debrided?</p>
+        <label for="debridementperformedyes">Yes</label>
+        <input required id="debridementperformedyes" type="radio" name="debridementPerformed" value="Yes">
+        <label for="debridementperformedno">No</label>
+        <input required id="debridementperformedno" type="radio" name="debridementPerformed" value="No">
 
     </div>
         <div>
         <label>What is the thickness of wound?</label>
-        <select name="thickness">
+        <select required name="thickness">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="any">partial thickness</option>
             <option value="full thickness">full thickness</option>
@@ -42,7 +32,7 @@
     </div>
     <div padding-top="40">
         <label>How much drainage does the wound have?  </label>
-        <select name="drainage">
+        <select required name="drainage">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="none to small">none to small</option>
             <option value="small to moderate">small to moderate</option>
@@ -50,10 +40,12 @@
         </select>
     </div>
 <div>
-    <input type="submit" value="Search Dressings" />
+    <input type="submit" class="btn btn-primary" value="Search Dressings" />
 </div>
 </form>
         </td>
     </tr>
 </table>
+</div>
 </body>
+</html>

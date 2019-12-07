@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:insert="fragments :: head"/>
+<body>
+<div class="container">
+    <nav th:replace="fragments :: navigation"></nav>
+    <h1 th:text="${title}">Wound Care Dressing Finder</h1>
+
+    <table>
+        <tr>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="post" style="max-width:600px;" th:object="${dressing}">
+                    <div class="form-group">
+                        <label th:for="dressingName">Dressing Name</label>
+                        <input class="form-control" th:field="*{dressingName}" />
+                        <span th:errors="*{dressingName}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="">Drainage Requirement</label>
+                        <select class="form-control" th:field="*{drainageRequirement}" />
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option th:value="none to small">none to small</option>
+                        <option th:value="small to moderate">small to moderate</option>
+                        <option th:value="moderate to heavy">moderate to heavy</option>
+                        <span th:errors="*{description}" class="error"></span>
+                    </div>
+
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:insert="fragments :: head"/>
+<body>
+<div class="container">
+    <nav th:insert="fragments :: navigation"></nav>
+    <h1>Wound Care Dressing Supply List</h1>
+
+
+    &nbsp;<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Dressing Name</th>
+        <th>Drainage Required</th>
+        <th>Thickness Required</th>
+        <th>Frequency Allowed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dressing : ${supplyList}">
+        <td th:text="${dressing.dressingName}"></td>
+        <td th:text="${dressing.drainageRequirement}"></td>
+        <td th:text="${dressing.thicknessRequirement}"></td>
+        <td th:text="${dressing.frequencyAllowed}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

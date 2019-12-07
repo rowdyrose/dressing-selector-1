@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <nav th:replace="fragments :: navigation"></nav>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+    <head th:insert="fragments :: head"/>
 <body>
+<div class="container">
+<nav th:insert="fragments :: navigation"></nav>
 <h1 th:text="${title}">Wound Care Dressing Finder</h1>
-<table>
+<div>Options selected</div>
+    <div>Surgical wound or Debridement Performed: <strong><span th:text="${debridementPerformed}"></span></strong></div>
+    <div>Thickness: <strong><span th:text="${thickness}"></span></strong></div>
+    <div>Drainage: <strong><span th:text="${drainage}"></span></strong></div>
+&nbsp;
+<div class="alert alert-danger" th:text="${debridementError}" th:if="${debridementError != null}"></div>
+
+&nbsp;<table class="table table-striped">
     <thead>
     <tr>
-        <td>Dressing Name</td>
-        <td>Drainage Required</td>
-        <td>Thickness Required</td>
-        <td>Frequency Allowed</td>
+        <th>Dressing Name</th>
+        <th>Drainage Required</th>
+        <th>Thickness Required</th>
+        <th>Frequency Allowed</th>
     </tr>
     </thead>
+    <tbody>
     <tr th:each="dressing : ${results}">
         <td th:text="${dressing.dressingName}"></td>
         <td th:text="${dressing.drainageRequirement}"></td>
         <td th:text="${dressing.thicknessRequirement}"></td>
         <td th:text="${dressing.frequencyAllowed}"></td>
     </tr>
+    </tbody>
 </table>
+</div>
 </body>
 </html>
