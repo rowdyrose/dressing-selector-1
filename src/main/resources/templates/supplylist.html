@@ -11,7 +11,7 @@
         <thead>
         <tr>
             <th></th>
-            <th>Dressing Name</th>
+            <th>Dressing Name (Click to Edit)</th>
             <th>Drainage Required</th>
             <th>Thickness Required</th>
             <th>Frequency Allowed</th>
@@ -20,14 +20,14 @@
         <tbody>
         <tr th:each="item : ${supplyList}">
             <td><input type="checkbox" name="dressingIds" th:value="${item.dressingId}" /></td>
-            <td th:text="${item.dressingName}"></td>
+            <td><a th:href="${'/modify?id=' + item.dressingId}" th:text="${item.dressingName}" title="CLick to Edit" /></td>
             <td th:text="${item.drainageRequirement}"></td>
             <td th:text="${item.thicknessRequirement}"></td>
             <td th:text="${item.frequencyAllowed}"></td>
         </tr>
         </tbody>
         </table>
-        <input type="submit" value="Remove Dressing" />
+        <div class="form-group"><input type="submit" value="Remove Dressing" class="btn btn-danger" /></div>
     </form>
 </div>
 </body>

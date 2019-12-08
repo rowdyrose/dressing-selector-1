@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 public class ModifyController {
 
@@ -22,6 +24,48 @@ public class ModifyController {
         return "/editdressing";
 
     }
+
+    @RequestMapping(value = "modify", method = RequestMethod.GET)
+    public String DisplayModifyForm(Model model, @RequestParam(required = false) String id) {
+
+        Dressing item = new Dressing();
+
+        if (id != null) {
+            Optional<Dressing> optionalDressing = dressingDao.findById(Long.parseLong(id));
+            if (optionalDressing.isPresent()) {
+                item = optionalDressing.get();
+            }
+        }
+
+        model.addAttribute("item", item);
+        return "modify";
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String SaveDressing(Model model,
+                               @RequestParam(required = false) String dressingId,
+                               @RequestParam(required = true) String dressingName,
+                               @RequestParam(required = false) String debridementRequired,
+                               @RequestParam(required = false) String drainageRequirement,
+                               @RequestParam(required = false) String thicknessRequirement,
+                               @RequestParam(required = false) String frequencyAllowed) {
+
+        Dressing item = new Dressing();
+        if (dressingId != null) {
+            item.setDressingId(Long.parseLong(dressingId));
+        }
+
+        item.setDebridementRequired(debridementRequired);
+        item.setDrainageRequirement(drainageRequirement);
+        item.setDressingName(dressingName);
+        item.setThicknessRequirement(thicknessRequirement);
+        item.setFrequencyAllowed(frequencyAllowed);
+        dressingDao.save(item);
+
+        return "redirect:supplylist";
+    }
+
+
     @RequestMapping(value = "additems", method = RequestMethod.POST)
     public String processAddForm(Model model,
                                  @RequestParam (required = false) String dressingId,
@@ -53,7 +97,7 @@ public class ModifyController {
             dressingDao.deleteById(dressingId);
         }
 
-        return "redirect:";
+        return "redirect:supplylist";
     }
 
 }

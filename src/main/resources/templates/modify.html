@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:insert="fragments :: head"/>
+<body>
+<div class="container">
+    <nav th:insert="fragments :: navigation"></nav>
+    <h1>Wound Care Dressing Supply List</h1>
+    <table>
+        <tr>
+            <td>
+                <form method="post" action="/update" th:object="${item}">
+                    <input type="hidden" name="dressingId" th:value="*{dressingId}">
+                    <div>
+                        <label for="dressingName">Name</label><br>
+                        <input type="text" name="dressingName" id="dressingName" th:value="*{dressingName}">
+                    </div>
+                    <div>
+                        <p>Debridement required?</p>
+                        <label>Yes</label>
+                        <input type="radio" name="debridementRequired" value="Yes" th:checked="*{debridementRequired == 'yes'}">
+                        <label>No</label>
+                        <input type="radio" name="debridementRequired" value="No" th:checked="*{debridementRequired != 'yes'}">
+                    </div>
+                    <div>
+                        <label>What is the thickness of wound?</label>
+                        <select th:field="*{thicknessRequirement}" id="thicknessRequirement">
+                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
+                            <option th:value="'any'" th:text="'any'"></option>
+                            <option th:value="'partial thickness'" th:text="'partial thickness'"></option>
+                            <option th:value="'full thickness'" th:text="'full thickness'"></option>
+                        </select>
+                    </div>
+                    <div padding-top="40">
+                        <label>Drainage requirement</label>:
+                        <select th:field="*{drainageRequirement}" id="drainageRequirement">
+                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
+                            <option th:value="'any'" th:text="'any'"></option>
+                            <option th:value="'none to small'" th:text="'none to small'"></option>
+                            <option th:value="'small to moderate'" th:text="'small to moderate'"></option>
+                            <option th:value="'moderate to heavy'" th:text="'moderate to heavy'"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="frequencyAllowed">Frequency Allowed</label>:
+                        <select th:field="*{frequencyAllowed}" id="frequencyAllowed">
+                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
+                            <option th:value="'once a day'" th:text="'once a day'"></option>
+                            <option th:value="'every third day'" th:text="'every third day'"></option>
+                            <option th:value="'based on wound size'" th:text="'based on wound size'"></option>
+                        </select>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <input type="submit" value="Save" class="btn btn-primary"/>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
