@@ -3,8 +3,9 @@
     <head th:insert="fragments :: head"/>
 <body>
 <div class="container">
-<nav th:insert="fragments :: navigation"></nav>
+
 <h1 th:text="${title}">Wound Care Dressing Finder</h1>
+    <nav th:insert="fragments :: navigation"></nav>
 <div>Options selected</div>
     <div>Surgical wound or Debridement Performed: <strong><span th:text="${debridementPerformed}"></span></strong></div>
     <div>Thickness: <strong><span th:text="${thickness}"></span></strong></div>

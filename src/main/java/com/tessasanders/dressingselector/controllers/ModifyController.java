@@ -21,7 +21,7 @@ public class ModifyController {
     public String displayAddForm(Model model) {
         model.addAttribute("title", "Add Dressing Item");
         model.addAttribute(new Dressing());
-        return "/editdressing";
+        return "/adddressing";
 
     }
 
@@ -85,7 +85,7 @@ public class ModifyController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveCheeseForm(Model model) {
+    public String displayRemoveDressingForm(Model model) {
         model.addAttribute("dressing", dressingDao.findAll());
         model.addAttribute("title", "Remove Dressing");
         return "/remove";

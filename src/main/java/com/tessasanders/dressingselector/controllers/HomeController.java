@@ -36,8 +36,6 @@ public class HomeController {
          for (Dressing item : dressingData) {
              if (debridementPerformed != null && !debridementPerformed.toLowerCase().equals(item.getDebridementRequired().toLowerCase())) {
                  continue;
-
-                     // need to add an error (medicare required either a surgical wound or debridement has been performed) if selected no
              }
 
                 // searches based on thickness selected

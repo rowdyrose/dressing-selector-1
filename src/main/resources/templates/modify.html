@@ -3,53 +3,55 @@
 <head th:insert="fragments :: head"/>
 <body>
 <div class="container">
-    <nav th:insert="fragments :: navigation"></nav>
+
     <h1>Wound Care Dressing Supply List</h1>
+    <nav th:insert="fragments :: navigation"></nav>
     <table>
         <tr>
             <td>
                 <form method="post" action="/update" th:object="${item}">
                     <input type="hidden" name="dressingId" th:value="*{dressingId}">
-                    <div>
-                        <label for="dressingName">Name</label><br>
-                        <input type="text" name="dressingName" id="dressingName" th:value="*{dressingName}">
+                    <div class="form-group">
+                        <p><label for="dressingName">Name</label> &nbsp;&nbsp;
+                            <input type="text" name="dressingName" id="dressingName" th:value="*{dressingName}"></p>
                     </div>
-                    <div>
-                        <p>Debridement required?</p>
-                        <label>Yes</label>
-                        <input type="radio" name="debridementRequired" value="Yes" th:checked="*{debridementRequired == 'yes'}">
-                        <label>No</label>
-                        <input type="radio" name="debridementRequired" value="No" th:checked="*{debridementRequired != 'yes'}">
+                    <div class="form-group">
+                        <label th:for="debridementRequired">Dedridement Requirement</label>
+                        <select required class="form-control" th:field="*{debridementRequired}">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option th:value="'Yes'" th:text="'Yes'"></option>
+                            <option th:value="'No'" th:text="'No'"></option>
+                        </select>
                     </div>
-                    <div>
-                        <label>What is the thickness of wound?</label>
-                        <select th:field="*{thicknessRequirement}" id="thicknessRequirement">
-                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
-                            <option th:value="'any'" th:text="'any'"></option>
-                            <option th:value="'partial thickness'" th:text="'partial thickness'"></option>
+                    <div class="form-group">
+                        <label th:for="thicknessRequirement">Thickness Requirement</label>
+                        <select required class="form-control" th:field="*{thicknessRequirement}">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option th:value="'any thickness'" th:text="'any thickness'"></option>
                             <option th:value="'full thickness'" th:text="'full thickness'"></option>
                         </select>
                     </div>
-                    <div padding-top="40">
-                        <label>Drainage requirement</label>:
-                        <select th:field="*{drainageRequirement}" id="drainageRequirement">
-                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
-                            <option th:value="'any'" th:text="'any'"></option>
+                    <div class="form-group">
+                        <label th:for="drainageRequirement">Drainage Requirement</label>
+                        <select required class="form-control" th:field="*{drainageRequirement}">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option th:value="'Any'" th:text="'Any'"></option>
                             <option th:value="'none to small'" th:text="'none to small'"></option>
                             <option th:value="'small to moderate'" th:text="'small to moderate'"></option>
                             <option th:value="'moderate to heavy'" th:text="'moderate to heavy'"></option>
                         </select>
                     </div>
-                    <div>
-                        <label for="frequencyAllowed">Frequency Allowed</label>:
-                        <select th:field="*{frequencyAllowed}" id="frequencyAllowed">
-                            <option th:value="''" th:text="'Choose here'" disabled hidden></option>
-                            <option th:value="'once a day'" th:text="'once a day'"></option>
-                            <option th:value="'every third day'" th:text="'every third day'"></option>
-                            <option th:value="'based on wound size'" th:text="'based on wound size'"></option>
+                    <div class="form-group">
+                        <label th:for="frequencyAllowed">Frequency of dressing change allowed</label>
+                        <select required class="form-control" th:field="*{frequencyAllowed}">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option th:value="'Once a Day'" th:text="'Once a Day'"></option>
+                            <option th:value="'Every Other Day'" th:text="'Every Other Day'"></option>
+                            <option th:value="'Every Third Day'" th:text="'Every Third Day'"></option>
+                            <option th:value="'Once a Week'" th:text="'Once a Week'"></option>
+                            <option th:value="'Based on wound size'" th:text="'Based on wound size'"></option>
                         </select>
                     </div>
-                    <div>&nbsp;</div>
                     <div class="btn-group" role="group" aria-label="Actions">
                         <input type="submit" value="Save" class="btn btn-primary"/>
                     </div>

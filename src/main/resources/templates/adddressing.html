@@ -3,9 +3,9 @@
 <head th:insert="fragments :: head"/>
 <body>
 <div class="container">
-    <nav th:replace="fragments :: navigation"></nav>
-    <h1 th:text="${title}">Wound Care Dressing Finder</h1>
 
+    <h1 th:text="${title}">Add Wound Care Items</h1>
+    <nav th:replace="fragments :: navigation"></nav>
 
                 <form method="post" style="max-width:600px;" th:object="${dressing}">
                     <div class="form-group">
@@ -47,6 +47,7 @@
                             <option th:value="'Every Other Day'" th:text="'Every Other Day'"></option>
                             <option th:value="'Every Third Day'" th:text="'Every Third Day'"></option>
                             <option th:value="'Once a Week'" th:text="'Once a Week'"></option>
+                            <option th:value="'Based on wound size'" th:text="'Based on wound size'"></option>
                         </select>
                         <span th:errors="*{frequencyAllowed}" class="error"></span>
                     </div>
